@@ -15,7 +15,7 @@ module.exports = {
     devServer: {
         port: 3000
     },
-    devtool: isDev ? 'source-map' : '',
+    devtool: isDev ? 'source-map' : false,
     entry: {
         main: './index.js',
     },
