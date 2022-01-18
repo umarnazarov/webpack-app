@@ -1,16 +1,23 @@
 const path = require('path')
 const HTMLWebpackPlugin = require('html-webpack-plugin')
 const { CleanWebpackPlugin } = require('clean-webpack-plugin')
+// const CopyWebpackPlugin = require('copy-webpack-plugin')
+const MiniCssExtractPlugin = require('mini-css-extract-plugin')
+
+
+const isDev = process.env.NODE_ENV === 'development'
+const isProd = !isDev
+
 
 module.exports = {
-    context: path.resolve(__dirname, 'src/pages'),
+    context: path.resolve(__dirname, 'src'),
     mode: 'development',
     devServer: {
         port: 3000
     },
+    devtool: isDev ? 'source-map' : '',
     entry: {
         main: './index.js',
-        about: './about.js'
     },
     output: {
         filename: '[name].[contenthash].js',
@@ -27,18 +34,56 @@ module.exports = {
         }
     },
     plugins: [
-        new HTMLWebpackPlugin({ template: './index.html' }),
-        new CleanWebpackPlugin()
+        new HTMLWebpackPlugin({
+            template: './index.html',
+            minify: {
+                collapseWhitespace: isProd
+            }
+        }),
+        new CleanWebpackPlugin(),
+        new MiniCssExtractPlugin({
+            filename: '[name].[contenthash].css'
+        }),
     ],
     module: {
         rules: [
             {
-                test: '/\.(css|less)$/',
-                use: ['style-loader', 'css-loader', 'less-loader']
+                test: /\.css$/,
+                use: [MiniCssExtractPlugin.loader, 'css-loader']
             },
             {
                 test: '/\.(jpg|png|jpeg|svg)$/',
                 use: ['file-loader']
+            },
+            {
+                test: /\.m?js$/,
+                exclude: /node_modules/,
+                use: {
+                    loader: 'babel-loader',
+                    options: {
+                        presets: ['@babel/preset-env', '@babel/preset-react']
+                    }
+                }
+            },
+            {
+                test: /\.m?ts$/,
+                exclude: /node_modules/,
+                use: {
+                    loader: 'babel-loader',
+                    options: {
+                        presets: ['@babel/preset-env', '@babel/preset-typescript'],
+                    }
+                }
+            },
+            {
+                test: /\.m?jsx$/,
+                exclude: /node_modules/,
+                use: {
+                    loader: 'babel-loader',
+                    options: {
+                        presets: ['@babel/preset-env', '@babel/preset-react']
+                    }
+                }
             }
         ]
     }
