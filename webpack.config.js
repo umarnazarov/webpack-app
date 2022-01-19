@@ -10,10 +10,10 @@ const isProd = !isDev
 
 
 module.exports = {
-    context: path.resolve(__dirname, 'src'),
+    // context: path.resolve(__dirname, 'src'),
     devtool: isDev ? 'source-map' : false,
     entry: {
-        main: './index.js',
+        main: './src/index.js',
     },
     output: {
         filename: '[name].[contenthash].js',
@@ -36,7 +36,7 @@ module.exports = {
     },
     plugins: [
         new HTMLWebpackPlugin({
-            template: './index.html',
+            template: './src/index.html',
             minify: {
                 collapseWhitespace: isProd
             }
