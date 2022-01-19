@@ -11,7 +11,6 @@ const isProd = !isDev
 
 module.exports = {
     context: path.resolve(__dirname, 'src'),
-    mode: 'development',
     devServer: {
         port: 3000,
         historyApiFallback: '/',
