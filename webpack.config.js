@@ -18,7 +18,7 @@ module.exports = {
     output: {
         filename: '[name].[contenthash].js',
         path: path.resolve(__dirname, 'dist'),
-        publicPath: '/'
+        publicPath: 'https://webpack-app-beta.vercel.app/'
     },
     devServer: {
         port: 3000,
