@@ -13,8 +13,9 @@ module.exports = {
     context: path.resolve(__dirname, 'src'),
     mode: 'development',
     devServer: {
+        historyApiFallback: true,
+        contentBase: './',
         port: 3000,
-        historyApiFallback: { index: "/", disableDotRule: true },
     },
     devtool: isDev ? 'source-map' : false,
     entry: {
