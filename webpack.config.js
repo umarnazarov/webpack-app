@@ -13,9 +13,8 @@ module.exports = {
     context: path.resolve(__dirname, 'src'),
     mode: 'development',
     devServer: {
-        historyApiFallback: true,
-        contentBase: './',
         port: 3000,
+        historyApiFallback: '/',
     },
     devtool: isDev ? 'source-map' : false,
     entry: {
@@ -24,7 +23,7 @@ module.exports = {
     output: {
         filename: '[name].[contenthash].js',
         path: path.resolve(__dirname, 'dist'),
-        publicPath: '/'
+        publicPath: 'auto'
     },
     resolve: {
         alias: {
