@@ -11,10 +11,6 @@ const isProd = !isDev
 
 module.exports = {
     context: path.resolve(__dirname, 'src'),
-    devServer: {
-        port: 3000,
-        historyApiFallback: '/',
-    },
     devtool: isDev ? 'source-map' : false,
     entry: {
         main: './index.js',
@@ -23,6 +19,10 @@ module.exports = {
         filename: '[name].[contenthash].js',
         path: path.resolve(__dirname, 'dist'),
         publicPath: '/'
+    },
+    devServer: {
+        port: 3000,
+        historyApiFallback: '/',
     },
     resolve: {
         alias: {
